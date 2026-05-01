@@ -15,7 +15,7 @@ const port = process.env.PORT || 9991;
 const db_url = process.env.MONGODB_URL;
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://fluxchat-cq1e.onrender.com",
     credentials: true
 }))
 app.use(express.json());
