@@ -63,19 +63,23 @@ function SideBar() {
     }, [searchInput])
 
     return (
-        <div className={`lg:w-[30%] lg:block ${!selectedUser ? "block" : "hidden"} w-full h-full overflow-hidden bg-slate-200`}>
+        <div className={`lg:w-[30%] lg:block ${!selectedUser ? "block" : "hidden"} w-full h-full overflow-hidden bg-slate-200 relative`}>
             <div
                 className={sidebar.logout}
                 onClick={handleLogOut}
             >
                 <BiLogOut className='w-6 h-6' />
             </div>
-            {searchInput.length > 0 && <div className='flex w-full top-0 h-75 overflow-y-auto flex-col gap-2.5'>
-                {searchData?.map((user) => {
+            {searchInput.length > 0 && <div className='absolute flex items-center w-full bg-white shadow-gray-400 shadow-lg top-62.5 h-125 pt-5 overflow-y-auto flex-col gap-2.5 z-150'>
+                {searchData?.map((user) =>
                     <div
-                        className={sidebar.chatlistItem}
+                        className='w-[95%] h-17.5 flex items-center gap-5 px-2.5 bg-white border-b-2 border-gray-400 hover:bg-[#92e0f9] cursor-pointer'
                         key={user._id}
-                        onClick={() => dispatch(setSelectedUser(user))}
+                        onClick={() => {
+                            dispatch(setSelectedUser(user))
+                            setSearchInput("")
+                            setSearch(false)
+                        }}
                     >
                         <div className='relative rounded-full'>
                             <div className={sidebar.chatlistProfileImageWrapper}
@@ -93,7 +97,7 @@ function SideBar() {
                         </div>
                         <h1 className='text-gray-600 font-semibold text-[15px]'>{user.name || user.userName}</h1>
                     </div>
-                })}
+                )}
             </div>}
 
             <div className={sidebar.header}>
